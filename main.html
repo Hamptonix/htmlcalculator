@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Hamptonix's Calculator</title>
+    <link rel="icon" type="image/x-icon" href="https://npr.brightspotcdn.com/dims4/default/e5a7d0a/2147483647/strip/true/crop/1280x960+0+0/resize/880x660!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Flegacy%2Fsites%2Fkut%2Ffiles%2F201410%2FSmile.jpg">
+  </head>
+  <body>
+    <h1>Calculator</h1>
+    <p id="para1"></p><br>
+    <button onclick="add1()">1</button>
+    <button onclick="add2()">2</button>
+    <button onclick="add3()">3</button>&nbsp;&nbsp;&nbsp;
+    <button onclick="setOperator('+')">+</button>
+    <button onclick="setOperator('-')">-</button><br>
+    <button onclick="add4()">4</button>
+    <button onclick="add5()">5</button>
+    <button onclick="add6()">6</button>&nbsp;&nbsp;&nbsp;
+    <button onclick="setOperator('*')">x</button>
+    <button onclick="setOperator('/')">/</button><br>
+    <button onclick="add7()">7</button>
+    <button onclick="add8()">8</button>
+    <button onclick="add9()">9</button><br>
+    <button onclick="add0()">0</button>
+    <button onclick="reset()">Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button onclick="equal()">=</button><br>
+    <p><sub>made by hamptonix</sub></p>
+    
+   
+    
+   
+    <script>
+      const amount = document.querySelector("#para1");
+      let currentInput = "";
+      let savedInput = "";
+      let operator = "";
+
+      function reset() {
+        amount.innerHTML = "";
+        currentInput = "";
+        savedInput = "";
+        operator = "";
+      }
+
+      function add1() { currentInput += "1"; updateDisplay(); }
+      function add2() { currentInput += "2"; updateDisplay(); }
+      function add3() { currentInput += "3"; updateDisplay(); }
+      function add4() { currentInput += "4"; updateDisplay(); }
+      function add5() { currentInput += "5"; updateDisplay(); }
+      function add6() { currentInput += "6"; updateDisplay(); }
+      function add7() { currentInput += "7"; updateDisplay(); }
+      function add8() { currentInput += "8"; updateDisplay(); }
+      function add9() { currentInput += "9"; updateDisplay(); }
+      function add0() { currentInput += "0"; updateDisplay(); }
+
+      function updateDisplay() {
+        amount.innerHTML = currentInput;
+      }
+
+      function setOperator(op) {
+        if (savedInput === "") {
+          savedInput = currentInput;
+        } else {
+          savedInput = evaluate(savedInput, currentInput, operator);
+        }
+        operator = op;
+        currentInput = "";
+      }
+
+      function equal() {
+        if (savedInput !== "") {
+          let result = evaluate(savedInput, currentInput, operator);
+          amount.innerHTML = result;
+          currentInput = result; 
+          savedInput = "";
+          operator = "";
+        }
+      }
+
+      function evaluate(a, b, op) {
+        a = parseFloat(a);
+        b = parseFloat(b);
+        if (op === "+") return a + b;
+        if (op === "-") return a - b;
+        if (op === "*") return a * b;
+        if (op === "/") return a / b;
+        return b; 
+      }
+    </script>
+  </body>
+</html>
